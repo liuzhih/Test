@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hand.liu.dao.BookDao">
+	<insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="bId">
+		insert into book
+		(bName,bType,bPrice,bDate,bStatue,bAuthor)
+		values(#{bName},#{bType},#{bPrice},#{bDate},#{bStatue},#{bAuthor})
+	</insert>
+	<update id="updateBook" parameterType="Book">
+		update book set
+		bName=#{bName},bType=#{bType},bPrice=#{bPrice},bDate=#{bDate},bStatue=#{bStatue},bAuthor=#{bAuthor}
+		where bId = #{bId}
+	</update>
+	<delete id="deleteBook" parameterType="int">
+		delete from book where bId = #{bId}
+	</delete>
+	<select id="queryAllBook" resultType="Book">
+		select * from book
+	</select>
+	<update id="borrowBook" parameterType="int">
+		update book set bStatue = 1 where bId = #{bId}	
+	</update>
+	<select id="findBookById" parameterType="int" resultType="Book">
+		select * from book where bId = #{bId}
+	</select>
+	<select id="findBookByType" parameterType="String" resultType="Book">
+		select * from book where bType = #{bType}
+	</select>
+</mapper>
